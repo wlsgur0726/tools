@@ -9,7 +9,7 @@
 @echo off
 
 set BoostRoot=%1
-if "%BoostRoot%"=="" set BoostRoot="%~dp0"
+if "%BoostRoot%"=="" set BoostRoot=%~dp0
 cd /d "%BoostRoot%"
 
 set InstallDir=%2
