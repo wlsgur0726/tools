@@ -1,21 +1,21 @@
-:: 32bit¿Í 64bit ¸ðµÎ ºôµåÇÏ¿© VC_Directory¿¡ º¹»çÇØ³Ö´Â ¹æ½ÄÀ¸·Î ¼³Ä¡ÇÏ´Â ½ºÅ©¸³Æ®.
-:: Program Files °æ·Î·Î º¹»çÇÒ ¶§ °ü¸®ÀÚ±ÇÇÑÀÌ ÇÊ¿ä ÇÒ ¼ö ÀÖÀ½.
-:: Visual Studio 2015 ±âÁØÀ¸·Î ÀÛ¼º.
+:: 32bitì™€ 64bit ëª¨ë‘ ë¹Œë“œí•˜ì—¬ VC_Directoryì— ë³µì‚¬í•´ë„£ëŠ” ë°©ì‹ìœ¼ë¡œ ì„¤ì¹˜í•˜ëŠ” ìŠ¤í¬ë¦½íŠ¸.
+:: Program Files ê²½ë¡œë¡œ ë³µì‚¬í•  ë•Œ ê´€ë¦¬ìžê¶Œí•œì´ í•„ìš” í•  ìˆ˜ ìžˆìŒ.
+:: Visual Studio 2015 ê¸°ì¤€ìœ¼ë¡œ ìž‘ì„±.
 ::
-:: Parameter ¼³¸í
-::  %1  :  Boost SourceÀÇ °æ·Î (±âº»°ª : ÇöÀç°æ·Î)
-::  %2  :  ¼³Ä¡ÇÒ À§Ä¡ (±âº»°ª : C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC)
+:: Parameter ì„¤ëª…
+::  %1  :  Boost Sourceì˜ ê²½ë¡œ (ê¸°ë³¸ê°’ : ì´ ë°°ì¹˜íŒŒì¼ì´ ìœ„ì¹˜í•œ ê²½ë¡œ)
+::  %2  :  ì„¤ì¹˜í•  ìœ„ì¹˜ (ê¸°ë³¸ê°’ : C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC)
 
 @echo off
 
 set BoostRoot=%1
-if "%BoostRoot%"=="" set BoostRoot=.
+if "%BoostRoot%"=="" set BoostRoot="%~dp0"
 cd /d "%BoostRoot%"
 
 set InstallDir=%2
 if "%InstallDir%"=="" set InstallDir=C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC
 
-:: ·Î±×ÀÇ ½ÃÀÛ
+:: ë¡œê·¸ì˜ ì‹œìž‘
 set LogFileName=_buildlog.log
 echo [%DATE% %TIME%] start > %LogFileName%
 
@@ -43,6 +43,6 @@ call b2.exe --clean >> %LogFileName%
 call b2.exe stage -j4 -a address-model=64 runtime-link=static,shared variant=release,debug threading=single,multi >> %LogFileName%
 xcopy /e /q /y .\stage\lib\* "%InstallDir%\lib\amd64\"
 
-:: ·Î±×ÀÇ ³¡
+:: ë¡œê·¸ì˜ ë
 echo [%DATE% %TIME%] complete
 echo [%DATE% %TIME%] complete >> %LogFileName%
